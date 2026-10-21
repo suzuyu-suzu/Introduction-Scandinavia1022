@@ -105,7 +105,7 @@ h2{font-family:"Shippori Mincho",serif;font-size:clamp(1.8rem,4vw,2.8rem);line-h
 #map .country{fill:rgba(255,255,255,.08);stroke:rgba(255,255,255,.45);stroke-width:.7;stroke-linejoin:round}
 #map .country.se{fill:rgba(127,209,196,.28);stroke:var(--aurora1);stroke-width:1.2}
 #map .country path{transition:fill-opacity 1s}
-#map .lbl{fill:rgba(255,255,255,.55);font-family:Inter;font-size:12px;letter-spacing:.25em}
+#map .lbl{fill:rgba(255,255,255,.6);font-family:"Noto Sans JP";font-weight:500;font-size:13px;letter-spacing:.12em}
 #map .pin{fill:var(--accent2)}
 #map .pulse{fill:none;stroke:var(--accent2);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:pulse 2.2s infinite}
 @keyframes pulse{from{transform:scale(.4);opacity:1}to{transform:scale(3.2);opacity:0}}
@@ -382,7 +382,9 @@ document.querySelectorAll('.tilt').forEach(el=>{
   const order=['se','no','fi','dk'];
   const g=el('g',{});
   const paths=M.cs.map(c=>el('path',{d:c.d,class:'country '+c.c},g));
-  const labels=M.labels.map(([t,x,y])=>{const e=el('text',{class:'lbl',x,y,'text-anchor':'middle'});e.textContent=t;return e});
+  const JA={NORGE:'ノルウェー',SVERIGE:'スウェーデン',SUOMI:'フィンランド',DANMARK:'デンマーク'};
+  const DX={SVERIGE:14};   // 日本語表記で幅が広がる分、国境にかからないよう少しずらす
+  const labels=M.labels.map(([t,x,y])=>{const e=el('text',{class:'lbl',x:x+(DX[t]||0),y,'text-anchor':'middle'});e.textContent=JA[t]||t;return e});
 
   const sx=M.sx, sy=M.sy;
   const pinG=el('g',{});

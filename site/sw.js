@@ -1,7 +1,7 @@
 // オフライン用サービスワーカー
 // 初回アクセス時にページ一式を保存し、以降はネットがなくても保存した内容を表示する。
 // ネットにつながっているときは裏で最新版を取りに行き、次回の表示から反映する。
-const CACHE = 'Introduction-Scandinavia1022-20261021185722';
+const CACHE = 'Introduction-Scandinavia1022-20261021192058';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
