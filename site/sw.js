@@ -1,11 +1,12 @@
 // オフライン用サービスワーカー
 // 初回アクセス時にページ一式を保存し、以降はネットがなくても保存した内容を表示する。
 // ネットにつながっているときは裏で最新版を取りに行き、次回の表示から反映する。
-const CACHE = 'Introduction-Scandinavia1022-20261021192939';
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
+const CACHE = 'Introduction-Scandinavia1022-20261021193934';
+const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192-kth.png', './icon-512-kth.png', './apple-touch-icon-kth.png'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+  // ブラウザのHTTPキャッシュを通さず、必ずサーバーから最新版を取って保存する
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS.map(u => new Request(u, { cache: 'reload' })))));
   self.skipWaiting();
 });
 
